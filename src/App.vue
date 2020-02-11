@@ -2,7 +2,7 @@
   <div id="app">
     <h1>Hello.</h1>
     <p>
-      My name is <a href="http://isaacosuna.com"><b>Isaac Osuna</b></a>
+      My name is <a href="http://isaacosuna.com" class="link-1"><b>Isaac Osuna</b></a>
     </p>
     <p>
       I've been learning the basics of <b>VueJS</b> and I am trying to make
@@ -85,8 +85,36 @@ export default {
   position: relative;
 }*/
 
-$underlineColor: #00B388;
-$underlineHeight: 5%;
+.link-1 {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+  color: black;
+  padding: 0 1px;
+  transition: color ease 0.3s;
+  cursor: pointer;
+}
+
+.link-1::before {
+   content: '';
+   position: absolute;
+   z-index: -1;
+   width: 100%;
+   height: 5%;
+   left: 0;
+   bottom: 0;
+   background-color: #00B388;
+   transition: all ease 0.3s;
+ }
+
+.link-1:hover {
+  color: white;
+  background-color: #00B388;
+  transition: ease-in 0.3s;
+  .link-1::after{
+    transition: max-height 0.25s ease-in;
+  }
+}
 
 
 p {
