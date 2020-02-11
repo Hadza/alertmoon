@@ -2,7 +2,8 @@
   <div id="app">
     <h1>Hello.</h1>
     <p>
-      My name is <a href="http://isaacosuna.com" class="link-1"><b>Isaac Osuna</b></a>
+      My name is
+      <a href="http://isaacosuna.com" class="link-1"><b>Isaac Osuna</b></a>
     </p>
     <p>
       I've been learning the basics of <b>VueJS</b> and I am trying to make
@@ -71,7 +72,7 @@ export default {
         console.log("Receiving message", state.socket.message.data);
         const price_str = JSON.parse(state.socket.message.data).data.price_str;
         this.currentPrice = price_str ? price_str : "";
-        this.priceLoaded = this.currentPrice !== "" ? true : false;
+        this.priceLoaded = this.currentPrice !== "";
       }
     });
   }
@@ -96,27 +97,26 @@ export default {
 }
 
 .link-1::before {
-   content: '';
-   position: absolute;
-   z-index: -1;
-   width: 100%;
-   height: 5%;
-   left: 0;
-   bottom: 0;
-   background-color: #00B388;
-   transition: all ease 0.3s;
- }
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 5%;
+  left: 0;
+  bottom: 0;
+  background-color: #00b388;
+  transition: all ease 0.3s;
+}
 
 .link-1:hover {
   color: white;
-  background-color: #00B388;
+  background-color: #00b388;
   transition: ease-in 0.3s;
-  .link-1::after{
-    transition: max-height 0.25s ease-in;
-  }
+
 }
-
-
+.link-1::after {
+  transition: max-height 0.25s ease-in;
+}
 p {
   font-size: 1.6em;
   font-weight: 300;

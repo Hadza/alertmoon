@@ -24,8 +24,7 @@ exports.sendPriceAlert = async () => {
         }
     };
 
-    const response = await admin.messaging().sendToDevice(deviceTokens, payload);
-    return response;
+    return await admin.messaging().sendToDevice(deviceTokens, payload);
 };
 
 // // Create and Deploy Your First Cloud Functions
