@@ -52,7 +52,6 @@
 
             this.$messaging.onMessage(function(payload) {
                 console.log("Message received. ", payload);
-                // ...
             });
 
             this.$auth.signInAnonymously().catch(error => {
