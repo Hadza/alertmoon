@@ -7,8 +7,8 @@ import { firestorePlugin } from "vuefire";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
-import "firebase/storage";
 import "firebase/messaging";
+import * as pw from "@/pw";
 
 //firebase
 const firebaseApp = firebase.initializeApp({
@@ -22,7 +22,12 @@ const firebaseApp = firebase.initializeApp({
   measurementId: "G-513N26R67B"
 });
 
+Vue.prototype.$auth = firebaseApp.auth();
+Vue.prototype.$db = firebaseApp.database();
 Vue.prototype.$messaging = firebaseApp.messaging();
+
+Vue.prototype.$key = pw.key;
+
 
 navigator.serviceWorker
   .register("/firebase-messaging-sw.js")
@@ -46,5 +51,5 @@ Vue.config.productionTip = false;
 
 new Vue({
   store,
-  render: h => h(App)
+  render: h => h(App),
 }).$mount("#app");
