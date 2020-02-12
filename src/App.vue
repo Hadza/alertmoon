@@ -3,7 +3,7 @@
     <h1>Hello.</h1>
     <p>
       My name is
-      <a href="http://isaacosuna.com" class="link-1"><b>Isaac Osuna</b></a>
+      <span href="http://isaacosuna.com" class="link-1">Isaac Osuna</span>
     </p>
     <p>
       I've been learning the basics of <b>VueJS</b> and I am trying to make
@@ -13,18 +13,21 @@
     </p>
     <transition name="fade" mode="out-in">
       <p key="1" v-if="!priceLoaded">
-        Loading last BITSTAMP BTC trade price...
+        Waiting for the last trade on BITSTAMP...
       </p>
       <p v-else>
         Current <b>BTC</b> price => $<b>{{ currentPrice }}</b>
       </p>
     </transition>
-    <!--    <h3>Rules</h3>
-    <ul>
-      <li>When price raises 5% in 1 hour</li>
-      <li>When the price decreaes by %4 in 1 nounr</li>
-      <li>One</li>
-    </ul>-->
+    <transition name="fade" mode="out-in">
+      <div key="1" v-if="permissionGranted">
+        <p>Testo</p>
+      </div>
+      <div key="2" v-else>
+        <a href="#" class="link-1" @click="askForPermission"
+          >Enable notifications</a>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -33,20 +36,43 @@ export default {
   name: "App",
   data() {
     return {
+      init: false,
+      permissionGranted: undefined,
       priceLoaded: false,
       currentPrice: "",
       data: {}
     };
   },
+  methods: {
+    sendConsole() {
+      console.log("holaaa");
+    },
+    askForPermission() {
+      this.$messaging
+        .requestPermission()
+        .then(() => this.$messaging.getToken())
+        .then(token => {
+          console.log(token, "hola");
+          this.permissionGranted = true;
+        })
+        .catch(function(err) {
+          console.log("Unable to get permission to notify.", err);
+          this.permissionGranted = false;
+        });
+    }
+  },
   created() {
+    debugger;
     this.$messaging
       .requestPermission()
       .then(() => this.$messaging.getToken())
       .then(token => {
-        console.log(token, "hola"); // Receiver Token to use in the notification
+        console.log(token);
+        this.permissionGranted = true;
       })
       .catch(function(err) {
         console.log("Unable to get permission to notify.", err);
+        this.permissionGranted = false;
       });
 
     this.$messaging.onMessage(function(payload) {
@@ -69,12 +95,12 @@ export default {
 
     this.$store.subscribe((mutation, state) => {
       if (mutation.type === "SOCKET_ONMESSAGE") {
-        console.log("Receiving message", state.socket.message.data);
         const price_str = JSON.parse(state.socket.message.data).data.price_str;
         this.currentPrice = price_str ? price_str : "";
         this.priceLoaded = this.currentPrice !== "";
       }
     });
+    this.init = true;
   }
 };
 </script>
@@ -112,7 +138,6 @@ export default {
   color: white;
   background-color: #00b388;
   transition: ease-in 0.3s;
-
 }
 .link-1::after {
   transition: max-height 0.25s ease-in;
@@ -129,6 +154,51 @@ body {
   -webkit-font-smoothing: antialiased;
   padding: 5vh 10vw;
   color: #121314;
+}
+
+.wrapper {
+  margin: 3em 0;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: relative;
+  transition: 0.5s color ease;
+  text-decoration: none;
+  color: black;
+  font-size: 1.5em;
+}
+a:hover {
+  color: #d73444;
+}
+
+a.before:before,
+a.after:after {
+  content: "";
+  transition: 0.5s all ease;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+}
+a.before:before {
+  top: -0.25em;
+}
+a.after:after {
+  bottom: -0.25em;
+}
+a.before:before,
+a.after:after {
+  height: 5px;
+  height: 0.35rem;
+  width: 0;
+  background: #d73444;
+}
+a.first:after {
+  left: 0;
 }
 
 .fade-enter-active,
