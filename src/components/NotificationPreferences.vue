@@ -2,69 +2,18 @@
   <div>
     <transition name="fade" mode="out-in">
       <div key="1" v-if="permissionGranted">
-        <p>Preferences</p>
-        <hr>
+        <p :style="{fontSize: 1.8+'em', fontWeight:350, marginBlockStart: 0.1+'em', marginBlockEnd:0.1+'em'}">Preferences</p>
+        <hr :style="{marginBlockStart:0.1+'em', marginBlockEnd:0.1+'em'}">
         <p>Price up <b>5%</b></p>
-        <p>
-
+        <p :style="{marginLeft:1+'em'}">
           <p-check class="p-icon p-smooth" color="success-o">
             <i slot="extra" class="icon mdi mdi-check"></i>
-            <span id="label">In 30 minutes window</span>
-          </p-check>
-        </p>
-
-
-        <hr>
-        <p-check class="p-icon p-curve p-jelly" color="danger">
-          <i slot="extra" class="icon mdi mdi-bug"></i>
-          Bug
-        </p-check>
-
-        <p>
-          <p-check class="p-icon p-rotate" color="success">
-            <i slot="extra" class="icon mdi mdi-check"></i>
-            When price goes up 10% in a 30 minutes window.
-          </p-check>
-        </p>
-        <p>
-          <p-check class="p-icon p-rotate" color="success">
-            <i slot="extra" class="icon mdi mdi-check"></i>
-            When price goes up 5% in a 1 hour window.
-          </p-check>
-        </p>
-        <p>
-          <p-check class="p-icon p-rotate" color="success">
-            <i slot="extra" class="icon mdi mdi-check"></i>
-            When price goes up 10% in a 1 hour window.
-          </p-check>
-        </p>
-        <p>
-          <p-check class="p-icon p-rotate" color="success">
-            <i slot="extra" class="icon mdi mdi-check"></i>
-            When price goes up 5% in a 3 hour window.
-          </p-check>
-        </p>
-        <p>
-          <p-check class="p-icon p-rotate" color="success">
-            <i slot="extra" class="icon mdi mdi-check"></i>
-            When price goes up 10% in a 3 hour window.
-          </p-check>
-        </p>
-        <p>
-          <p-check class="p-icon p-rotate" color="success">
-            <i slot="extra" class="icon mdi mdi-check"></i>
-            When price goes up 5% in a 6 hour window.
-          </p-check>
-        </p>
-        <p>
-          <p-check class="p-icon p-rotate" color="success">
-            <i slot="extra" class="icon mdi mdi-check"></i>
-            When price goes up 10% in a 6 hour window.
+            <span>In a 30 minutes window</span>
           </p-check>
         </p>
       </div>
-      <div key="2" v-else>
-        <p href="#" class="link-1" @click="askForPermission">
+      <div key="2" v-else >
+        <p href="#" class="link-1" @click="askForPermission" :style="{marginBlockStart: 0.1+'em', marginBlockEnd:0.1+'em'}">
           Enable notifications
         </p>
       </div>
