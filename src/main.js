@@ -9,18 +9,12 @@ import "firebase/auth";
 import "firebase/database";
 import "firebase/messaging";
 import * as pw from "@/pw";
+import PrettyCheckbox from 'pretty-checkbox-vue';
+
+Vue.use(PrettyCheckbox);
 
 //firebase
-const firebaseApp = firebase.initializeApp({
-  apiKey: "AIzaSyCcpMOFhkCmdyjy53536DgvlosRrdaC8cM",
-  authDomain: "bitcointracker-kkk.firebaseapp.com",
-  databaseURL: "https://bitcointracker-kkk.firebaseio.com",
-  projectId: "bitcointracker-kkk",
-  storageBucket: "bitcointracker-kkk.appspot.com",
-  messagingSenderId: "2743611449",
-  appId: "1:2743611449:web:59bd2a45b2bd318d719de8",
-  measurementId: "G-513N26R67B"
-});
+const firebaseApp = firebase.initializeApp(pw.firebaseConfig);
 
 Vue.prototype.$auth = firebaseApp.auth();
 Vue.prototype.$db = firebaseApp.database();

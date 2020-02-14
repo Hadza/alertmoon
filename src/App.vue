@@ -55,6 +55,7 @@ p {
   font-weight: 300;
   line-height: 1.4;
 }
+
 body {
   font-family: "Rubik", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
