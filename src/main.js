@@ -20,7 +20,7 @@ Vue.prototype.$auth = firebaseApp.auth();
 Vue.prototype.$db = firebaseApp.database();
 Vue.prototype.$messaging = firebaseApp.messaging();
 
-Vue.prototype.$key = pw.key;
+Vue.prototype.$pw = pw;
 
 
 navigator.serviceWorker
