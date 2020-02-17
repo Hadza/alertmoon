@@ -8,6 +8,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 import "firebase/messaging";
+import "firebase/functions"
 import * as pw from "@/pw";
 import PrettyCheckbox from 'pretty-checkbox-vue';
 
@@ -19,6 +20,8 @@ const firebaseApp = firebase.initializeApp(pw.firebaseConfig);
 Vue.prototype.$auth = firebaseApp.auth();
 Vue.prototype.$db = firebaseApp.database();
 Vue.prototype.$messaging = firebaseApp.messaging();
+Vue.prototype.$functions = firebaseApp.functions();
+firebaseApp.functions().useFunctionsEmulator('http://localhost:5000');
 
 Vue.prototype.$pw = pw;
 

@@ -200,6 +200,7 @@
 </template>
 
 <script>
+
   export default {
   name: "NotificationPreferences",
   data() {
@@ -262,7 +263,21 @@
       }
     },
     manageSubscription(topic, suscribe){
-        fetch('https://iid.googleapis.com/iid/v1' + !suscribe ? '':':batchRemove' + '/' + this.token + '/rel/topics/' + topic, {
+      let payload =  {
+        token:this.token,
+        shouldSubcribe:suscribe,
+        topic
+      };
+
+      const suscribeToTopic = this.$functions.httpsCallable('suscribeToTopic');
+      console.log('pero minimo llego', payload);
+      suscribeToTopic(payload).then(result => {
+        console.log('se suscribio mamon', result)
+      }).catch(err => {
+        console.log('nosepuedo w', err)
+      })
+
+/*        fetch('https://iid.googleapis.com/iid/v1' + !suscribe ? '':':batchRemove' + '/' + this.token + '/rel/topics/' + topic, {
           method: 'POST',
           headers: new Headers({
             'Authorization': 'key=' + this.$pw.firebaseConfig.apiKey
@@ -277,7 +292,7 @@
           console.log('Subscribed to "' + topic + '"');
         }).catch(error => {
           console.error(error);
-        });
+        });*/
     }
   },
   created() {
